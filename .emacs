@@ -1,4 +1,4 @@
-;;;; Bob's .emacs file
+;;;; Airead's .emacs file
 ;; 2012/12/20 10:54:01 (before the end of the world)
 ;;
 ;; Each section in this file is introduced by a line beginning with
@@ -38,6 +38,8 @@ Convert relative(MUST) path to absolute path."
 ;;; set my own load-path
 (setq load-path (clear-site-lisp-path load-path))
 (setq custom-lib-path '(
+                        "./"
+                        "./extension"
                         "./lib"
                         "./lib/icicles"
                         ))
@@ -46,10 +48,10 @@ Convert relative(MUST) path to absolute path."
                  load-path nil))
   
 ;;; Text mode and Auto Fill mode
-;; The next two lines put Emacs into Text mode and Auto Fill mode, and
-;; are for writers who want to start writing prose rather than code.
+;; The next two lines put Emacs into Text mode are for writers who
+;; want to start writing prose rather than code.
 (setq-default major-mode 'text-mode)
-(add-hook 'text-mode-hook 'turn-on-auto-fill)
+;;(add-hook 'text-mode-hook 'turn-on-auto-fill)
 
 ;;; Prevent Extraneous Tabs
 (setq-default indent-tabs-mode nil)
@@ -63,3 +65,24 @@ Convert relative(MUST) path to absolute path."
 ;;; Continue to display the matching parentheses
 (show-paren-mode nil)
 
+;;; Set font
+(add-to-list 'default-frame-alist '(font . "monaco"))
+
+;;; icices
+(load-library "icicles")
+(icy-mode 1)
+
+;;; highlight symbol 
+(require 'highlight-symbol)
+(global-set-key (kbd "C-'") 'highlight-symbol-at-point)
+(global-set-key (kbd "C-M-'") 'highlight-symbol-remove-all)
+(global-set-key (kbd "C-,") 'highlight-symbol-prev)
+(global-set-key (kbd "C-.") 'highlight-symbol-next)
+
+;;; table bar and binding
+(require 'tabbar)
+(tabbar-mode t)
+(global-set-key [s-up] 'tabbar-backward-group)
+(global-set-key [s-down] 'tabbar-forward-group)
+(global-set-key (kbd "C-:") 'tabbar-backward)
+(global-set-key (kbd "C-\"") 'tabbar-forward)
