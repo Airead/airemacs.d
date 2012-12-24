@@ -42,6 +42,7 @@ Convert relative(MUST) path to absolute path."
                         "./extension"
                         "./lib"
                         "./lib/icicles"
+                        "./lib/pymacs"
                         ))
 (setq load-path (append
                  (get-custom-load-path custom-lib-path) nil
@@ -63,7 +64,7 @@ Convert relative(MUST) path to absolute path."
 (global-set-key "\C-x\C-b" 'buffer-menu)
 
 ;;; Continue to display the matching parentheses
-(show-paren-mode nil)
+(show-paren-mode t)
 
 ;;; Set font
 (add-to-list 'default-frame-alist '(font . "monaco"))
@@ -86,3 +87,32 @@ Convert relative(MUST) path to absolute path."
 (global-set-key [s-down] 'tabbar-forward-group)
 (global-set-key (kbd "C-:") 'tabbar-backward)
 (global-set-key (kbd "C-\"") 'tabbar-forward)
+
+;;; add own python mode
+(require 'python)
+(setq
+ python-shell-interpreter "ipython2.7"
+ python-shell-interpreter-args ""
+ python-shell-prompt-regexp "In \\[[0-9]+\\]: "
+ python-shell-prompt-output-regexp "Out\\[[0-9]+\\]: "
+ python-shell-completion-setup-code
+ "from IPython.core.completerlib import module_completion"
+ python-shell-completion-module-string-code
+ "';'.join(module_completion('''%s'''))\n"
+ python-shell-completion-string-code
+ "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")
+
+;;; pymacs
+(require 'pymacs)
+(autoload 'pymacs-apply "pymacs")
+(autoload 'pymacs-call "pymacs")
+(autoload 'pymacs-eval "pymacs" nil t)
+(autoload 'pymacs-exec "pymacs" nil t)
+(autoload 'pymacs-load "pymacs" nil t)
+(autoload 'pymacs-autoload "pymacs")
+;;(eval-after-load "pymacs"
+;;  '(add-to-list 'pymacs-load-path YOUR-PYMACS-DIRECTORY"))
+
+;;; ropemacs
+(setq pymacs-load-path '("./lib/pymacs"))
+(pymacs-load "ropemacs" "rope-")
