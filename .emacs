@@ -45,6 +45,7 @@ Convert relative(MUST) path to absolute path."
                         "./lib/pymacs"
                         "./lib/auto-complete-1.3.1"
                         "./lib/yasnippet"
+                        "./lib/org"
                         ))
 (setq load-path (append
                  (get-custom-load-path custom-lib-path) nil
@@ -154,6 +155,32 @@ Convert relative(MUST) path to absolute path."
       `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
+
+;;; org mode
+(require 'org-install)
+(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-cc" 'org-capture)
+(global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-cb" 'org-iswitchb)
+(setq org-todo-keywords
+      '((sequence "TODO(t!)" "NEXT(n)" "WAITTING(w)" "SOMEDAY(s)" "|" "DONE(d@/!)" "ABORT(a@/!)")
+        ))
+;; gtd: get thing done
+(setq org-directory "~/Dropbox/GTD/") 
+(setq org-capture-templates 
+      '(("n" "New" entry (file+headline "~/Dropbox/GTD/inbox.org" "Inbox")
+         "* %? %t \n %i\n %a")
+        ("t" "Task" entry (file+headline "~/Dropbox/GTD/task.org" "Tasks")
+         "** TODO %?\n %i\n %a")
+        ("c" "Calendar" entry (file+headline "~/Dropbox/GTD/task.org" "Tasks") 
+         "** TODO %?\n %i\n %a")
+        ("i" "Idea" entry (file+headline "~/Dropbox/GTD/task.org" "Ideas")
+         "** %?\n %i\n %a")
+        ("r" "Note" entry (file+headline "~/Dropbox/GTD/note.org") 
+         "* %?\n %i\n %a" )
+        ("p" "Project" entry (file+headline "~/Dropbox/GTD/project.org") 
+         "** %?\n %i\n %a" %g)))
+(setq org-default-notes-file (concat org-directory "/inbox.org"))
 
 ;;; end of my emacs configuration
 
