@@ -43,6 +43,8 @@ Convert relative(MUST) path to absolute path."
                         "./lib"
                         "./lib/icicles"
                         "./lib/pymacs"
+                        "./lib/auto-complete-1.3.1"
+                        "./lib/yasnippet"
                         ))
 (setq load-path (append
                  (get-custom-load-path custom-lib-path) nil
@@ -56,6 +58,10 @@ Convert relative(MUST) path to absolute path."
 
 ;;; Prevent Extraneous Tabs
 (setq-default indent-tabs-mode nil)
+
+;;; line number mode
+(linum-mode t)
+(menu-bar-mode 0)
 
 ;;; Keybinding for `occur'
 (global-set-key "\C-co" 'occur)
@@ -116,3 +122,38 @@ Convert relative(MUST) path to absolute path."
 ;;; ropemacs
 (setq pymacs-load-path '("./lib/pymacs"))
 (pymacs-load "ropemacs" "rope-")
+
+;;; auto complete
+(require 'auto-complete-config)
+(add-to-list 'ac-dictionary-directories "/home/airead/study/git-proj/airemacs.d/lib/auto-complete-1.3.1/dict")
+(ac-config-default)
+(define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
+
+;;; linux kernel code style
+(defun linux-c-mode ()
+  "C mode with adjusted defaults for use with the Linux kernel."
+  (interactive)
+  (c-mode)
+  (c-set-style "K&R")
+  (setq tab-width 4)
+  (setq indent-tabs-mode nil)
+  (setq c-basic-offset 4))
+(add-to-list 'auto-mode-alist '("\.c$" . linux-c-mode))
+(add-to-list 'auto-mode-alist '("\.h$" . linux-c-mode))
+
+;;; yasnippet
+(require 'yasnippet)
+(yas-global-mode 1)
+
+;;; smart compile
+(require 'smart-compile)
+(global-set-key (kbd "<f9>") 'smart-compile)
+
+;;; move temp and autosave file to temporary dir
+(setq backup-directory-alist
+      `((".*" . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms
+      `((".*" ,temporary-file-directory t)))
+
+;;; end of my emacs configuration
+
