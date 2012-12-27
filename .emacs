@@ -176,10 +176,12 @@ Convert relative(MUST) path to absolute path."
          "** TODO %?\n %i\n %a")
         ("i" "Idea" entry (file+headline "~/Dropbox/GTD/task.org" "Ideas")
          "** %?\n %i\n %a")
-        ("r" "Note" entry (file+headline "~/Dropbox/GTD/note.org") 
+        ("r" "Note" entry (file+headline "~/Dropbox/GTD/note.org" "Note")
          "* %?\n %i\n %a" )
-        ("p" "Project" entry (file+headline "~/Dropbox/GTD/project.org") 
-         "** %?\n %i\n %a" %g)))
+        ("p" "Project" entry (file "~/Dropbox/GTD/project.org") 
+         "* %? %^g\n %i\n %a")
+        ("b" "overwork" plain (file+headline "~/work/addban.org" "Addban")
+         "  %<%Y-%m-%d %H:%M:%S> %?")))
 (setq org-default-notes-file (concat org-directory "/inbox.org"))
 
 ;;; end of my emacs configuration
