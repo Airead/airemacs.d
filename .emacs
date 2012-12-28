@@ -61,7 +61,7 @@ Convert relative(MUST) path to absolute path."
 (setq-default indent-tabs-mode nil)
 
 ;;; line number mode
-(linum-mode)
+(global-linum-mode t)
 (menu-bar-mode 0)
 
 ;;; set time locale
@@ -170,6 +170,9 @@ Convert relative(MUST) path to absolute path."
 (setq org-todo-keywords
       '((sequence "TODO(t!)" "NEXT(n)" "WAITTING(w)" "SOMEDAY(s)" "|" "DONE(d@/!)" "ABORT(a@/!)")
         ))
+(setq org-tag-alist '(("WORK" . ?w)
+                     ("AVOCATION" . ?a)))
+(setq org-refile-targets '(("task.org" :maxlevel . 1)))
 (setq org-directory "~/Dropbox/GTD/") 
 (setq org-capture-templates 
       '(("n" "New" entry (file+headline "inbox.org" "Inbox")
