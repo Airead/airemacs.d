@@ -188,5 +188,8 @@ Convert relative(MUST) path to absolute path."
          "  %<<%Y-%m-%d %Ea %H:%M>> %?")))
 (setq org-default-notes-file (concat org-directory "/inbox.org"))
 
+;;; graphviz-dot-mode
+(load-library "graphviz-dot-mode")
+
 ;;; end of my emacs configuration
 
