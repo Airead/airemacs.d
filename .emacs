@@ -61,8 +61,11 @@ Convert relative(MUST) path to absolute path."
 (setq-default indent-tabs-mode nil)
 
 ;;; line number mode
-(linum-mode t)
+(linum-mode)
 (menu-bar-mode 0)
+
+;;; set time locale
+(setq system-time-locale "C")
 
 ;;; Keybinding for `occur'
 (global-set-key "\C-co" 'occur)
@@ -162,26 +165,27 @@ Convert relative(MUST) path to absolute path."
 (global-set-key "\C-cc" 'org-capture)
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cb" 'org-iswitchb)
+
+;; gtd: get thing done
 (setq org-todo-keywords
       '((sequence "TODO(t!)" "NEXT(n)" "WAITTING(w)" "SOMEDAY(s)" "|" "DONE(d@/!)" "ABORT(a@/!)")
         ))
-;; gtd: get thing done
 (setq org-directory "~/Dropbox/GTD/") 
 (setq org-capture-templates 
-      '(("n" "New" entry (file+headline "~/Dropbox/GTD/inbox.org" "Inbox")
-         "* %? %t \n %i\n %a")
-        ("t" "Task" entry (file+headline "~/Dropbox/GTD/task.org" "Tasks")
-         "** TODO %?\n %i\n %a")
-        ("c" "Calendar" entry (file+headline "~/Dropbox/GTD/task.org" "Tasks") 
-         "** TODO %?\n %i\n %a")
-        ("i" "Idea" entry (file+headline "~/Dropbox/GTD/task.org" "Ideas")
-         "** %?\n %i\n %a")
-        ("r" "Note" entry (file+headline "~/Dropbox/GTD/note.org" "Note")
-         "* %?\n %i\n %a" )
-        ("p" "Project" entry (file "~/Dropbox/GTD/project.org") 
-         "* %? %^g\n %i\n %a")
+      '(("n" "New" entry (file+headline "inbox.org" "Inbox")
+         "* %? %<<%Y-%m-%d %H:%M>> \n %i\n")
+        ("t" "Task" entry (file+headline "task.org" "Task")
+         "** TODO %?\n %i\n")
+        ("c" "Calendar" entry (file+headline "task.org" "Calendar") 
+         "** TODO %?\n %i\n")
+        ("i" "Idea" entry (file+headline "task.org" "Ideas")
+         "** %?\n %i\n")
+        ("r" "Note" entry (file+headline "note.org" "Note")
+         "* %?\n %i\n" )
+        ("p" "Project" entry (file "project.org") 
+         "* %? %^g\n %i\n")
         ("b" "overwork" plain (file+headline "~/work/addban.org" "Addban")
-         "  %<%Y-%m-%d %H:%M:%S> %?")))
+         "  %<<%Y-%m-%d %Ea %H:%M>> %?")))
 (setq org-default-notes-file (concat org-directory "/inbox.org"))
 
 ;;; end of my emacs configuration
