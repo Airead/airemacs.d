@@ -46,6 +46,7 @@ Convert relative(MUST) path to absolute path."
                         "./lib/auto-complete-1.3.1"
                         "./lib/yasnippet"
                         "./lib/org"
+                        "./lib/xcscope"
                         ))
 (setq load-path (append
                  (get-custom-load-path custom-lib-path) nil
@@ -171,9 +172,11 @@ Convert relative(MUST) path to absolute path."
       '((sequence "TODO(t!)" "NEXT(n)" "WAITTING(w)" "SOMEDAY(s)" "|" "DONE(d@/!)" "ABORT(a@/!)")
         ))
 (setq org-tag-alist '(("WORK" . ?w)
-                     ("AVOCATION" . ?a)))
+                     ("AVOCATION" . ?a)
+                     ("LIVING" . ?l)))
 (setq org-refile-targets '(("task.org" :maxlevel . 1)))
 (setq org-directory "~/Dropbox/GTD/") 
+(setq cur-year-month (format-time-string "%Y-%m" (current-time)))
 (setq org-capture-templates 
       '(("n" "New" entry (file+headline "inbox.org" "Inbox")
          "* %? %<<%Y-%m-%d %H:%M>> \n %i\n")
@@ -187,12 +190,28 @@ Convert relative(MUST) path to absolute path."
          "* %?\n %i\n" )
         ("p" "Project" entry (file "project.org") 
          "* %? %^g\n %i\n")
-        ("b" "overwork" plain (file+headline "~/work/addban.org" "Addban")
-         "  %<<%Y-%m-%d %Ea %H:%M>> %?")))
+        ("b" "overwork" plain (file+headline "~/work/addban.org" "2012-12")
+        "   %<<%Y-%m-%d %a %H:%M>> %?")))
 (setq org-default-notes-file (concat org-directory "/inbox.org"))
 
 ;;; graphviz-dot-mode
 (load-library "graphviz-dot-mode")
+
+;;; xcscope
+(require 'xcscope)
+(define-key global-map [(control f3)]  'cscope-set-initial-directory)
+(define-key global-map [(control f4)]  'cscope-unset-initial-directory)
+(define-key global-map [(control f5)]  'cscope-find-this-symbol)
+(define-key global-map [(control f6)]  'cscope-find-global-definition)
+(define-key global-map [(control f7)]  'cscope-find-global-definition-no-prompting)
+(define-key global-map [(control f8)]  'cscope-pop-mark)
+;;	(define-key global-map [(control f9)]  'cscope-next-symbol)
+;;	(define-key global-map [(control f10)] 'cscope-next-file)
+;;	(define-key global-map [(control f11)] 'cscope-prev-symbol)
+;;	(define-key global-map [(control f12)] 'cscope-prev-file)
+;;      (define-key global-map [(meta f9)]  'cscope-display-buffer)
+;;      (defin-ekey global-map [(meta f10)] 'cscope-display-buffer-toggle)
+
 
 ;;; end of my emacs configuration
 
