@@ -8,6 +8,7 @@
 *~
 *.out
 *.pyc
+*.elc
 
 # Compiled Static libraries
 *.lai

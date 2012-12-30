@@ -47,6 +47,7 @@ Convert relative(MUST) path to absolute path."
                         "./lib/yasnippet"
                         "./lib/org"
                         "./lib/xcscope"
+                        "./lib/w3m"
                         ))
 (setq load-path (append
                  (get-custom-load-path custom-lib-path) nil
@@ -212,6 +213,8 @@ Convert relative(MUST) path to absolute path."
 ;;      (define-key global-map [(meta f9)]  'cscope-display-buffer)
 ;;      (defin-ekey global-map [(meta f10)] 'cscope-display-buffer-toggle)
 
+;;; w3m
+(require 'w3m)
 
 ;;; end of my emacs configuration
 
