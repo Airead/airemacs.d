@@ -216,5 +216,8 @@ Convert relative(MUST) path to absolute path."
 ;;; w3m
 (require 'w3m)
 
+;;; php mode
+(require 'php-mode)
+
 ;;; end of my emacs configuration
 
