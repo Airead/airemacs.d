@@ -172,8 +172,9 @@ Convert relative(MUST) path to absolute path."
 (setq org-todo-keywords
       '((sequence "TODO(t!)" "NEXT(n)" "WAITTING(w)" "SOMEDAY(s)" "|" "DONE(d@/!)" "ABORT(a@/!)")
         ))
-(setq org-tag-alist '(("WORK" . ?w)
+(setq org-tag-alist '(("OFFICE" . ?o)
                      ("AVOCATION" . ?a)
+                     ("WAIT" . ?w)
                      ("LIVING" . ?l)))
 (setq org-refile-targets '(("task.org" :maxlevel . 1)))
 (setq org-directory "~/Dropbox/GTD/") 
@@ -191,7 +192,7 @@ Convert relative(MUST) path to absolute path."
          "* %?\n %i\n" )
         ("p" "Project" entry (file "project.org") 
          "* %? %^g\n %i\n")
-        ("b" "overwork" plain (file+headline "~/work/addban.org" "2012-12")
+        ("b" "overwork" plain (file+headline "~/work/addban.org" "2013-01")
         "   %<<%Y-%m-%d %a %H:%M>> %?")))
 (setq org-default-notes-file (concat org-directory "/inbox.org"))
 
@@ -218,6 +219,12 @@ Convert relative(MUST) path to absolute path."
 
 ;;; php mode
 (require 'php-mode)
+
+;;; markdown-mode
+(autoload 'markdown-mode "markdown-mode.el"
+  "Major mode for editing Markdown files" t)
+(add-to-list 'auto-mode-alist '("\\.text" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.markdown" . markdown-mode))
 
 ;;; end of my emacs configuration
 
