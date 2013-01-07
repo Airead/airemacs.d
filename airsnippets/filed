@@ -1,0 +1,7 @@
+# name : file describe
+# --
+/**
+ * @file `(insert (buffer-name))`
+ * @brief 
+ * @author Airead Fan <fgh1987168@gmail.com>
+ * @date `(insert (format-time-string "%Y/%m/%d %T\n" (current-time)))` */

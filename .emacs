@@ -15,7 +15,15 @@
 ;; For example, to find out about mail mode, enter mail mode and then
 ;; type control-h m.
 
-;; some useful function
+;;; useful variable
+(defvar emacs-load-file-name load-file-name
+  "Store the filename that yasnippet.el was originally loaded from.")
+
+;;; some useful function
+(defun get-path (path)
+  "get absolute path"
+  (concat (file-name-directory emacs-load-file-name) path))
+
 (defun clear-site-lisp-path (lists)
   "Clear site-lisp path.
 Beasue I run emacs with `-Q', and hope
@@ -149,6 +157,7 @@ Convert relative(MUST) path to absolute path."
 
 ;;; yasnippet
 (require 'yasnippet)
+(add-to-list 'yas-snippet-dirs (get-path "airsnippets"))
 (yas-global-mode 1)
 
 ;;; smart compile
@@ -235,5 +244,38 @@ Convert relative(MUST) path to absolute path."
 (add-to-list 'auto-mode-alist '("\\.jsp\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+
+;;; if 0 end
+;;Highlight #if 0 to #endif
+(defun my-c-mode-font-lock-if0 (limit)
+  (save-restriction
+    (widen)
+    (save-excursion
+      (goto-char (point-min))
+      (let ((depth 0) str start start-depth)
+        (while (re-search-forward "^\\s-*#\\s-*\\(if\\|else\\|endif\\)" limit 'move)
+          (setq str (match-string 1))
+          (if (string= str "if")
+              (progn
+                (setq depth (1+ depth))
+                (when (and (null start) (looking-at "\\s-+0"))
+                  (setq start (match-end 0)
+                        start-depth depth)))
+            (when (and start (= depth start-depth))
+              (c-put-font-lock-face start (match-beginning 0) 'font-lock-comment-face)
+              (setq start nil))
+            (when (string= str "endif")
+              (setq depth (1- depth)))))
+        (when (and start (> depth 0))
+          (c-put-font-lock-face start (point) 'font-lock-comment-face)))))
+  nil)
+
+(defun my-c-mode-common-hook ()
+  (font-lock-add-keywords
+   nil
+   '((my-c-mode-font-lock-if0 (0 font-lock-comment-face prepend))) 'add-to-end))
+
+(add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
+
 ;;; end of my emacs configuration
 
