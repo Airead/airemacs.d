@@ -281,6 +281,7 @@ Convert relative(MUST) path to absolute path."
 (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
 
 ;;; open recent files
+(recentf-mode 1)
 (global-set-key "\C-xrf" 'recentf-open-files)
 
 ;;; define key for view-mode
