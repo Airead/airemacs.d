@@ -204,6 +204,9 @@ Convert relative(MUST) path to absolute path."
         ("b" "overwork" plain (file+headline "~/work/addban.org" "2013-01")
         "   %<<%Y-%m-%d %a %H:%M>> %?")))
 (setq org-default-notes-file (concat org-directory "/inbox.org"))
+;; set agenda files
+(setq org-agenda-files (list "~/Dropbox/GTD/task.org"
+                             "~/Dropbox/GTD/project.org"))
 
 ;;; graphviz-dot-mode
 (load-library "graphviz-dot-mode")
@@ -276,6 +279,16 @@ Convert relative(MUST) path to absolute path."
    '((my-c-mode-font-lock-if0 (0 font-lock-comment-face prepend))) 'add-to-end))
 
 (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
+
+;;; open recent files
+(global-set-key "\C-xrf" 'recentf-open-files)
+
+;;; define key for view-mode
+(global-set-key "\C-cv" 'view-mode)
+(define-key view-mode-map (kbd "j") 'next-line)
+(define-key view-mode-map (kbd "k") 'previous-line)
+(define-key view-mode-map (kbd "l") 'forward-char)
+(define-key view-mode-map (kbd "h") 'backward-char)
 
 ;;; end of my emacs configuration
 
