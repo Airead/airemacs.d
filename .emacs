@@ -56,6 +56,8 @@ Convert relative(MUST) path to absolute path."
                         "./lib/org"
                         "./lib/xcscope"
                         "./lib/w3m"
+                        "./lib/color-theme"
+                        "./lib/color-theme/emacs-color-theme-solarized"
                         ))
 (setq load-path (append
                  (get-custom-load-path custom-lib-path) nil
@@ -69,6 +71,9 @@ Convert relative(MUST) path to absolute path."
 
 ;;; Prevent Extraneous Tabs
 (setq-default indent-tabs-mode nil)
+
+;;; mutiline comment
+(setq comment-style 'multi-line)
 
 ;;; line number mode
 (global-linum-mode t)
@@ -184,8 +189,11 @@ Convert relative(MUST) path to absolute path."
 (setq org-tag-alist '(("OFFICE" . ?o)
                      ("AVOCATION" . ?a)
                      ("WAIT" . ?w)
+                     ("IMPORTANT" . ?i)
+                     ("URGENT" . ?u)
                      ("LIVING" . ?l)))
-(setq org-refile-targets '(("task.org" :maxlevel . 1)))
+(setq org-refile-targets '(("task.org" :maxlevel . 1)
+                           ("finished.org" :maxlevel . 1)))
 (setq org-directory "~/Dropbox/GTD/") 
 (setq cur-year-month (format-time-string "%Y-%m" (current-time)))
 (setq org-capture-templates 
@@ -201,7 +209,7 @@ Convert relative(MUST) path to absolute path."
          "* %?\n %i\n" )
         ("p" "Project" entry (file "project.org") 
          "* %? %^g\n %i\n")
-        ("b" "overwork" plain (file+headline "~/work/addban.org" "2013-01")
+        ("b" "overwork" plain (file+headline "~/work/addban.org" "2013-02")
         "   %<<%Y-%m-%d %a %H:%M>> %?")))
 (setq org-default-notes-file (concat org-directory "/inbox.org"))
 ;; set agenda files
@@ -290,6 +298,20 @@ Convert relative(MUST) path to absolute path."
 (define-key view-mode-map (kbd "k") 'previous-line)
 (define-key view-mode-map (kbd "l") 'forward-char)
 (define-key view-mode-map (kbd "h") 'backward-char)
+
+;;; gdb bindkey
+(add-hook 'gdb-mode-hook '(lambda ()
+	        (define-key c-mode-base-map [(f5)] 'gud-go)
+                            (define-key c-mode-base-map [(f7)] 'gud-step)
+                            (define-key c-mode-base-map [(f5)] 'gud-go)
+                            (define-key c-mode-base-map [(f8)] 'gud-next)))
+
+;;; color theme
+(load-library "color-theme")
+(require 'color-theme-solarized)
+(setq solarized-termcolors 256)
+(setq solarized-contrast 'normal)
+(color-theme-solarized-light)
 
 ;;; end of my emacs configuration
 
