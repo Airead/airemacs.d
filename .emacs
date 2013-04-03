@@ -60,6 +60,8 @@ Convert relative(MUST) path to absolute path."
                         "./lib/color-theme/emacs-color-theme-solarized"
                         "./lib/cedet-1.1/common"
                         "./lib/ecb-2.40"
+                        "./lib/ess-12.09-2/lisp"
+                        "./lib/magit"
                         ))
 (setq load-path (append
                  (get-custom-load-path custom-lib-path) nil
@@ -211,7 +213,7 @@ Convert relative(MUST) path to absolute path."
          "* %?\n %i\n" )
         ("p" "Project" entry (file "project.org") 
          "* %? %^g\n %i\n")
-        ("b" "overwork" plain (file+headline "~/work/addban.org" "2013-02")
+        ("b" "overwork" plain (file+headline "~/work/addban.org" "2013-03")
         "   %<<%Y-%m-%d %a %H:%M>> %?")))
 (setq org-default-notes-file (concat org-directory "/inbox.org"))
 ;; set agenda files
@@ -357,5 +359,14 @@ Convert relative(MUST) path to absolute path."
 
 ;;; ecb
 (require 'ecb-autoloads)
+
+;;; ess for R
+(require 'ess-site)
+
+;;; turn on iswitch mode
+(iswitchb-mode 1)
+
+;;; magit
+(require 'magit)
 
 ;;; end of my emacs configuration
