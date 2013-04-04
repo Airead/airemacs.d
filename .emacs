@@ -191,6 +191,7 @@ Convert relative(MUST) path to absolute path."
       '((sequence "TODO(t!)" "NEXT(n)" "WAITTING(w)" "SOMEDAY(s)" "|" "DONE(d@/!)" "ABORT(a@/!)")
         ))
 (setq org-tag-alist '(("OFFICE" . ?o)
+                     ("HOME" . ?h)
                      ("AVOCATION" . ?a)
                      ("WAIT" . ?w)
                      ("IMPORTANT" . ?i)
@@ -373,5 +374,6 @@ Convert relative(MUST) path to absolute path."
 
 ;;; magit
 (require 'magit)
+(global-set-key "\C-cg" 'magit-status)
 
 ;;; end of my emacs configuration
