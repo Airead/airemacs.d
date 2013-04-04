@@ -65,7 +65,7 @@
   ("\\.mp\\'"         . "mptopdf %f")
   ("\\.pl\\'"         . "perl -cw %f")
   ("\\.rb\\'"         . "ruby -cw %f")
-  ("\\.dot"           . "cat %f | dot -Tsvg > %n.svg")
+  ("\\.dot"           . "cat %f | dot -Tsvg > %n.svg; eog %n.svg")
 )  "Alist of filename patterns vs corresponding format control strings.
 Each element looks like (REGEXP . STRING) or (MAJOR-MODE . STRING).
 Visiting a file whose name matches REGEXP specifies STRING as the

@@ -524,15 +524,15 @@ Turning on Graphviz Dot mode calls the value of the variable
        '(graphviz-dot-font-lock-keywords))
   ;; RR - If user is running this in the scratch buffer, there is no
   ;; buffer file name...
-  (if (buffer-file-name)
-      (set (make-local-variable 'compile-command)
-       (concat graphviz-dot-dot-program
-               " -T" graphviz-dot-preview-extension " "
-               "\"" buffer-file-name "\""
-               " > \""
-               (file-name-sans-extension
-                buffer-file-name)
-               "." graphviz-dot-preview-extension "\""))) 
+  ;; (if (buffer-file-name)
+  ;;     (set (make-local-variable 'compile-command)
+  ;;      (concat graphviz-dot-dot-program
+  ;;              " -T" graphviz-dot-preview-extension " "
+  ;;              "\"" buffer-file-name "\""
+  ;;              " > \""
+  ;;              (file-name-sans-extension
+  ;;               buffer-file-name)
+  ;;              "." graphviz-dot-preview-extension "\""))) 
   (set (make-local-variable 'compilation-parse-errors-function)
        'graphviz-dot-compilation-parse-errors)
   (if dot-menu
