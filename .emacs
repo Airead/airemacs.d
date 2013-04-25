@@ -214,7 +214,7 @@ Convert relative(MUST) path to absolute path."
          "* %?\n %i\n" )
         ("p" "Project" entry (file "project.org") 
          "* %? %^g\n %i\n")
-        ("b" "overwork" plain (file+headline "~/work/addban.org" "2013-03")
+        ("b" "overwork" plain (file+headline "~/work/addban.org" "2013-04")
         "   %<<%Y-%m-%d %a %H:%M>> %?")))
 (setq org-default-notes-file (concat org-directory "/inbox.org"))
 ;; set agenda files
@@ -374,6 +374,6 @@ Convert relative(MUST) path to absolute path."
 
 ;;; magit
 (require 'magit)
-(global-set-key "\C-cg" 'magit-status)
+(global-set-key "\C-ci" 'magit-status)
 
 ;;; end of my emacs configuration
