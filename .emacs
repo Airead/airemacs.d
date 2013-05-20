@@ -58,6 +58,7 @@ Convert relative(MUST) path to absolute path."
                         "./lib/w3m"
                         "./lib/color-theme"
                         "./lib/color-theme/emacs-color-theme-solarized"
+                        "../emacs-jedi"
                         "./lib/cedet-1.1/common"
                         "./lib/ecb-2.40"
                         "./lib/ess-12.09-2/lisp"
@@ -131,20 +132,20 @@ Convert relative(MUST) path to absolute path."
  python-shell-completion-string-code
  "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")
 
-;;; pymacs
-(require 'pymacs)
-(autoload 'pymacs-apply "pymacs")
-(autoload 'pymacs-call "pymacs")
-(autoload 'pymacs-eval "pymacs" nil t)
-(autoload 'pymacs-exec "pymacs" nil t)
-(autoload 'pymacs-load "pymacs" nil t)
-(autoload 'pymacs-autoload "pymacs")
-;;(eval-after-load "pymacs"
-;;  '(add-to-list 'pymacs-load-path YOUR-PYMACS-DIRECTORY"))
+;; ;;; pymacs
+;; (require 'pymacs)
+;; (autoload 'pymacs-apply "pymacs")
+;; (autoload 'pymacs-call "pymacs")
+;; (autoload 'pymacs-eval "pymacs" nil t)
+;; (autoload 'pymacs-exec "pymacs" nil t)
+;; (autoload 'pymacs-load "pymacs" nil t)
+;; (autoload 'pymacs-autoload "pymacs")
+;; ;;(eval-after-load "pymacs"
+;; ;;  '(add-to-list 'pymacs-load-path YOUR-PYMACS-DIRECTORY"))
 
-;;; ropemacs
-(setq pymacs-load-path '("./lib/pymacs"))
-(pymacs-load "ropemacs" "rope-")
+;; ;;; ropemacs
+;; (setq pymacs-load-path '("./lib/pymacs"))
+;; (pymacs-load "ropemacs" "rope-")
 
 ;;; auto complete
 (require 'auto-complete-config)
@@ -376,4 +377,7 @@ Convert relative(MUST) path to absolute path."
 (require 'magit)
 (global-set-key "\C-ci" 'magit-status)
 
+;;; jedi
+(setq jedi:setup-keys t)
+(autoload 'jedi:setup "jedi" nil t)
 ;;; end of my emacs configuration
