@@ -55,6 +55,7 @@ Convert relative(MUST) path to absolute path."
                         "./lib/yasnippet"
                         "./lib/org"
                         "./lib/xcscope"
+                        "./lib/xpycscope"
                         "./lib/w3m"
                         "./lib/color-theme"
                         "./lib/color-theme/emacs-color-theme-solarized"
@@ -250,6 +251,7 @@ Convert relative(MUST) path to absolute path."
 ;;; graphviz-dot-mode
 (load-library "graphviz-dot-mode")
 
+
 ;;; xcscope
 (require 'xcscope)
 (define-key global-map [(control f3)]  'cscope-set-initial-directory)
@@ -264,6 +266,23 @@ Convert relative(MUST) path to absolute path."
 ;;	(define-key global-map [(control f12)] 'cscope-prev-file)
 ;;      (define-key global-map [(meta f9)]  'cscope-display-buffer)
 ;;      (defin-ekey global-map [(meta f10)] 'cscope-display-buffer-toggle)
+
+
+;;; pyscope
+(require 'xpycscope)
+(define-key global-map [(control f3)]  'pycscope-set-initial-directory)
+(define-key global-map [(control f4)]  'pycscope-unset-initial-directory)
+(define-key global-map [(control f5)]  'pycscope-find-this-symbol)
+(define-key global-map [(control f6)]  'pycscope-find-global-definition)
+(define-key global-map [(control f7)]  'pycscope-find-global-definition-no-prompting)
+(define-key global-map [(control f8)]  'pycscope-pop-mark)
+;;	(define-key global-map [(control f9)]  'pycscope-next-symbol)
+;;	(define-key global-map [(control f10)] 'pycscope-next-file)
+;;	(define-key global-map [(control f11)] 'pycscope-prev-symbol)
+;;	(define-key global-map [(control f12)] 'pycscope-prev-file)
+;;      (define-key global-map [(meta f9)]  'pycscope-display-buffer)
+;;      (defin-ekey global-map [(meta f10)] 'pycscope-display-buffer-toggle)
+
 
 ;;; w3m
 (require 'w3m)
