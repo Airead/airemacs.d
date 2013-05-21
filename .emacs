@@ -63,6 +63,7 @@ Convert relative(MUST) path to absolute path."
                         "./lib/ecb-2.40"
                         "./lib/ess-12.09-2/lisp"
                         "./lib/magit"
+                        "./lib/ein"
                         ))
 (setq load-path (append
                  (get-custom-load-path custom-lib-path) nil
@@ -154,16 +155,40 @@ Convert relative(MUST) path to absolute path."
 (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
 
 ;;; linux kernel code style
-(defun linux-c-mode ()
-  "C mode with adjusted defaults for use with the Linux kernel."
-  (interactive)
-  (c-mode)
-  (c-set-style "K&R")
-  (setq tab-width 4)
-  (setq indent-tabs-mode nil)
-  (setq c-basic-offset 4))
-(add-to-list 'auto-mode-alist '("\.c$" . linux-c-mode))
-(add-to-list 'auto-mode-alist '("\.h$" . linux-c-mode))
+(defun c-lineup-arglist-tabs-only (ignored)
+  "Line up argument lists by tabs, not spaces"
+  (let* ((anchor (c-langelem-pos c-syntactic-element))
+	 (column (c-langelem-2nd-pos c-syntactic-element))
+	 (offset (- (1+ column) anchor))
+	 (steps (floor offset c-basic-offset)))
+    (* (max steps 1)
+       c-basic-offset)))
+
+(add-hook 'c-mode-common-hook
+          (lambda ()
+            ;; Add kernel style
+            (c-add-style
+             "linux-tabs-only"
+             '("linux" (c-offsets-alist
+                        (arglist-cont-nonempty
+                         c-lineup-gcc-asm-reg
+                         c-lineup-arglist-tabs-only))))))
+
+(add-hook 'c-mode-hook
+          (lambda ()
+                (setq indent-tabs-mode t)
+                (c-set-style "linux-tabs-only")))
+
+;; (defun linux-c-mode ()
+;;   "C mode with adjusted defaults for use with the Linux kernel."
+;;   (interactive)
+;;   (c-mode)
+;;   (c-set-style "K&R")
+;;   (setq tab-width 4)
+;;   (setq indent-tabs-mode nil)
+;;   (setq c-basic-offset 4))
+;; (add-to-list 'auto-mode-alist '("\.c$" . linux-c-mode))
+;; (add-to-list 'auto-mode-alist '("\.h$" . linux-c-mode))
 
 ;;; yasnippet
 (require 'yasnippet)
@@ -215,7 +240,7 @@ Convert relative(MUST) path to absolute path."
          "* %?\n %i\n" )
         ("p" "Project" entry (file "project.org") 
          "* %? %^g\n %i\n")
-        ("b" "overwork" plain (file+headline "~/work/addban.org" "2013-04")
+        ("b" "overwork" plain (file+headline "~/work/addban.org" "2013-05")
         "   %<<%Y-%m-%d %a %H:%M>> %?")))
 (setq org-default-notes-file (concat org-directory "/inbox.org"))
 ;; set agenda files
@@ -380,4 +405,17 @@ Convert relative(MUST) path to absolute path."
 ;;; jedi
 (setq jedi:setup-keys t)
 (autoload 'jedi:setup "jedi" nil t)
+
+;;; ERC
+(require 'erc-join)
+(erc-autojoin-mode 1)
+(setq erc-autojoin-channels-alist
+          '(
+            ("freenode.net" "#ubuntu-cn" "##0x71" "#openbrd")
+            ))
+
+
+;;; ein (emacs ipython notebook)
+(require 'ein)
+
 ;;; end of my emacs configuration
