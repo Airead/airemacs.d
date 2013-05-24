@@ -51,7 +51,7 @@ Convert relative(MUST) path to absolute path."
                         "./lib"
                         "./lib/icicles"
                         "./lib/pymacs"
-                        "./lib/auto-complete-1.3.1"
+                        "./lib/auto-complete"
                         "./lib/yasnippet"
                         "./lib/org"
                         "./lib/xcscope"
@@ -436,5 +436,8 @@ Convert relative(MUST) path to absolute path."
 
 ;;; ein (emacs ipython notebook)
 (require 'ein)
+ (setq ein:use-auto-complete t)
+;; Or, to enable "superpack" (a little bit hacky improvements):
+;; (setq ein:use-auto-complete-superpack t)
 
 ;;; end of my emacs configuration
