@@ -436,8 +436,9 @@ Convert relative(MUST) path to absolute path."
 
 ;;; ein (emacs ipython notebook)
 (require 'ein)
- (setq ein:use-auto-complete t)
+;; (setq ein:use-auto-complete t)
 ;; Or, to enable "superpack" (a little bit hacky improvements):
-;; (setq ein:use-auto-complete-superpack t)
+(setq ein:use-auto-complete-superpack t)
+(setq ein:use-smartrep t)
 
 ;;; end of my emacs configuration
