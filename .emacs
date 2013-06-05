@@ -270,12 +270,12 @@ Convert relative(MUST) path to absolute path."
 
 ;;; pyscope
 (require 'xpycscope)
-(define-key global-map [(control f3)]  'pycscope-set-initial-directory)
-(define-key global-map [(control f4)]  'pycscope-unset-initial-directory)
-(define-key global-map [(control f5)]  'pycscope-find-this-symbol)
-(define-key global-map [(control f6)]  'pycscope-find-global-definition)
-(define-key global-map [(control f7)]  'pycscope-find-global-definition-no-prompting)
-(define-key global-map [(control f8)]  'pycscope-pop-mark)
+;; (define-key global-map [(control f3)]  'pycscope-set-initial-directory)
+;; (define-key global-map [(control f4)]  'pycscope-unset-initial-directory)
+;; (define-key global-map [(control f5)]  'pycscope-find-this-symbol)
+;; (define-key global-map [(control f6)]  'pycscope-find-global-definition)
+;; (define-key global-map [(control f7)]  'pycscope-find-global-definition-no-prompting)
+;; (define-key global-map [(control f8)]  'pycscope-pop-mark)
 ;;	(define-key global-map [(control f9)]  'pycscope-next-symbol)
 ;;	(define-key global-map [(control f10)] 'pycscope-next-file)
 ;;	(define-key global-map [(control f11)] 'pycscope-prev-symbol)
@@ -440,5 +440,11 @@ Convert relative(MUST) path to absolute path."
 ;; Or, to enable "superpack" (a little bit hacky improvements):
 (setq ein:use-auto-complete-superpack t)
 (setq ein:use-smartrep t)
+
+;;; rfc mode
+(setq auto-mode-alist
+      (cons '("/rfc[0-9]+\\.txt\\(\\.gz\\)?\\'" . rfcview-mode)
+            auto-mode-alist))
+(autoload 'rfcview-mode "rfcview" nil t)
 
 ;;; end of my emacs configuration
