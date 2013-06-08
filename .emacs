@@ -134,6 +134,9 @@ Convert relative(MUST) path to absolute path."
  python-shell-completion-string-code
  "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")
 
+(define-key python-mode-map (kbd "C-c n") 'ein:connect-to-notebook-buffer)
+
+
 ;; ;;; pymacs
 ;; (require 'pymacs)
 ;; (autoload 'pymacs-apply "pymacs")
