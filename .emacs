@@ -123,7 +123,7 @@ Convert relative(MUST) path to absolute path."
 ;;; add own python mode
 (require 'python)
 (setq
- python-shell-interpreter "ipython2.7"
+ python-shell-interpreter "ipython"
  python-shell-interpreter-args ""
  python-shell-prompt-regexp "In \\[[0-9]+\\]: "
  python-shell-prompt-output-regexp "Out\\[[0-9]+\\]: "
@@ -257,35 +257,38 @@ Convert relative(MUST) path to absolute path."
 
 ;;; xcscope
 (require 'xcscope)
-(define-key global-map [(control f3)]  'cscope-set-initial-directory)
-(define-key global-map [(control f4)]  'cscope-unset-initial-directory)
-(define-key global-map [(control f5)]  'cscope-find-this-symbol)
-(define-key global-map [(control f6)]  'cscope-find-global-definition)
-(define-key global-map [(control f7)]  'cscope-find-global-definition-no-prompting)
-(define-key global-map [(control f8)]  'cscope-pop-mark)
-;;	(define-key global-map [(control f9)]  'cscope-next-symbol)
-;;	(define-key global-map [(control f10)] 'cscope-next-file)
-;;	(define-key global-map [(control f11)] 'cscope-prev-symbol)
-;;	(define-key global-map [(control f12)] 'cscope-prev-file)
-;;      (define-key global-map [(meta f9)]  'cscope-display-buffer)
-;;      (defin-ekey global-map [(meta f10)] 'cscope-display-buffer-toggle)
+(add-hook 'c-mode-hook
+          (lambda ()
+            (define-key c-mode-map [(control f3)]  'cscope-set-initial-directory)
+            (define-key c-mode-map [(control f4)]  'cscope-unset-initial-directory)
+            (define-key c-mode-map [(control f5)]  'cscope-find-this-symbol)
+            (define-key c-mode-map [(control f6)]  'cscope-find-global-definition)
+            (define-key c-mode-map [(control f7)]  'cscope-find-global-definition-no-prompting)
+            (define-key c-mode-map [(control f8)]  'cscope-pop-mark)
+            (define-key c-mode-map [(control f9)]  'cscope-next-symbol)
+            (define-key c-mode-map [(control f10)] 'cscope-next-file)
+            (define-key c-mode-map [(control f11)] 'cscope-prev-symbol)
+            (define-key c-mode-map [(control f12)] 'cscope-prev-file)
+            (define-key c-mode-map [(meta f9)]  'cscope-display-buffer)
+            (defin-ekey c-mode-map [(meta f10)] 'cscope-display-buffer-toggle)
+            ))
 
 
 ;;; pyscope
 (require 'xpycscope)
-;; (define-key global-map [(control f3)]  'pycscope-set-initial-directory)
-;; (define-key global-map [(control f4)]  'pycscope-unset-initial-directory)
-;; (define-key global-map [(control f5)]  'pycscope-find-this-symbol)
-;; (define-key global-map [(control f6)]  'pycscope-find-global-definition)
-;; (define-key global-map [(control f7)]  'pycscope-find-global-definition-no-prompting)
-;; (define-key global-map [(control f8)]  'pycscope-pop-mark)
-;;	(define-key global-map [(control f9)]  'pycscope-next-symbol)
-;;	(define-key global-map [(control f10)] 'pycscope-next-file)
-;;	(define-key global-map [(control f11)] 'pycscope-prev-symbol)
-;;	(define-key global-map [(control f12)] 'pycscope-prev-file)
-;;      (define-key global-map [(meta f9)]  'pycscope-display-buffer)
-;;      (defin-ekey global-map [(meta f10)] 'pycscope-display-buffer-toggle)
-
+(define-key python-mode-map [(control f3)]  'pycscope-set-initial-directory)
+(define-key python-mode-map [(control f4)]  'pycscope-unset-initial-directory)
+(define-key python-mode-map [(control f5)]  'pycscope-find-this-symbol)
+(define-key python-mode-map [(control f6)]  'pycscope-find-global-definition)
+(define-key python-mode-map [(control f7)]  'pycscope-find-global-definition-no-prompting)
+(define-key python-mode-map [(control f8)]  'pycscope-pop-mark)
+(define-key python-mode-map [(control f9)]  'pycscope-next-symbol)
+(define-key python-mode-map [(control f10)] 'pycscope-next-file)
+(define-key python-mode-map [(control f11)] 'pycscope-prev-symbol)
+(define-key python-mode-map [(control f12)] 'pycscope-prev-file)
+(define-key python-mode-map [(meta f9)]  'pycscope-display-buffer)
+(define-key python-mode-map [(meta f10)] 'pycscope-display-buffer-toggle)
+(define-key python-mode-map (kbd "C-c n") 'ein:connect-to-notebook-buffer)
 
 ;;; w3m
 (require 'w3m)
