@@ -429,8 +429,10 @@ Convert relative(MUST) path to absolute path."
 (global-set-key "\C-ci" 'magit-status)
 
 ;;; jedi
+(add-hook 'python-mode-hook 'jedi:setup)
 (setq jedi:setup-keys t)
 (autoload 'jedi:setup "jedi" nil t)
+(add-hook 'python-mode-hook 'jedi:ac-setup)
 
 ;;; ERC
 (require 'erc-join)
