@@ -6,8 +6,7 @@ if you == 'Airead':
         pass
         if you == 'Renhao':
             pass
-        else:  # key tab will cycling
-            pass
+        else:  # key tab will cyclingfd
 
 def func(a1, a2, a3):
     """test yasnipet `def' snipet
@@ -18,3 +17,6 @@ def func(a1, a2, a3):
     - `a3`:
     """
     pass
+
+fdidsaf
+

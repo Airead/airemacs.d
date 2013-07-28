@@ -505,4 +505,29 @@ Convert relative(MUST) path to absolute path."
 (define-key cm-map "b" 'outline-backward-same-level)       ; Backward - same level
 (global-set-key "\M-o" cm-map)
 
+;;; flymake
+(when (load "flymake" t)
+      (defun flymake-pylint-init ()
+        (let* ((temp-file (flymake-init-create-temp-buffer-copy
+                           'flymake-create-temp-inplace))
+           (local-file (file-relative-name
+                        temp-file
+                        (file-name-directory buffer-file-name))))
+          (list "flake8" (list local-file))))
+      (add-to-list 'flymake-allowed-file-name-masks
+               '("\\.py\\'" flymake-pylint-init)))
+(add-hook 'python-mode-hook (lambda ()
+                              (flymake-mode 1)))
+(setq flymake-no-changes-timeout 3600)
+(setq flymake-start-syntax-check-on-newline nil)
+
+(custom-set-faces
+ '(flymake-errline ((((class color)) (:underline "red"))))
+ '(flymake-warnline ((((class color)) (:underline "blue")))))
+
+;; (custom-set-variables
+;;      '(help-at-pt-timer-delay 0.9)
+;;      '(help-at-pt-display-when-idle '(flymake-overlay)))
+
+(require 'flymake-cursor)
 ;;; end of my emacs configuration
