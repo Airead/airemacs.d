@@ -349,6 +349,7 @@ Convert relative(MUST) path to absolute path."
 (global-set-key "\C-xrf" 'recentf-open-files)
 
 ;;; define key for view-mode
+(require 'view)
 (global-set-key "\C-cv" 'view-mode)
 (define-key view-mode-map (kbd "j") 'next-line)
 (define-key view-mode-map (kbd "k") 'previous-line)
