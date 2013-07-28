@@ -371,8 +371,9 @@ the trigger key itself."
 ;;; User-visible variables
 
 (defvar yas-keymap  (let ((map (make-sparse-keymap)))
-                      (define-key map [(tab)]       'yas-next-field-or-maybe-expand)
-                      (define-key map (kbd "TAB")   'yas-next-field-or-maybe-expand)
+                      ;; (define-key map [(tab)]       'yas-next-field-or-maybe-expand)
+                      ;; (define-key map (kbd "TAB")   'yas-next-field-or-maybe-expand)
+                      (define-key map (kbd "C-;")   'yas-next-field-or-maybe-expand)
                       (define-key map [(shift tab)] 'yas-prev-field)
                       (define-key map [backtab]     'yas-prev-field)
                       (define-key map (kbd "C-g")   'yas-abort-snippet)
@@ -636,8 +637,9 @@ snippet itself contains a condition that returns the symbol
 
     ;; Now for the stuff that has direct keybindings
     ;;
-    (define-key map [(tab)]     'yas-expand)
-    (define-key map (kbd "TAB") 'yas-expand)
+    ;; (define-key map [(tab)]     'yas-expand)
+    ;; (define-key map (kbd "TAB") 'yas-expand)
+    (define-key map (kbd "C-;") 'yas-expand)
     (define-key map "\C-c&\C-s" 'yas-insert-snippet)
     (define-key map "\C-c&\C-n" 'yas-new-snippet)
     (define-key map "\C-c&\C-v" 'yas-visit-snippet-file)

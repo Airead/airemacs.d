@@ -92,8 +92,8 @@ Convert relative(MUST) path to absolute path."
 ;;; Keybinding for `occur'
 (global-set-key "\C-co" 'occur)
 
-;;; Rebind `C-x C-b' for `buffer-menu'
-(global-set-key "\C-x\C-b" 'buffer-menu)
+;;; use ibuffer
+(global-set-key (kbd "C-x C-b") 'ibuffer)
 
 ;;; Continue to display the matching parentheses
 (show-paren-mode t)
