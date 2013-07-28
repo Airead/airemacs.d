@@ -520,14 +520,12 @@ Convert relative(MUST) path to absolute path."
                               (flymake-mode 1)))
 (setq flymake-no-changes-timeout 3600)
 (setq flymake-start-syntax-check-on-newline nil)
+(define-key python-mode-map [(control f2)] 'flymake-goto-next-error)
+
+(require 'flymake-cursor)
 
 (custom-set-faces
  '(flymake-errline ((((class color)) (:underline "red"))))
  '(flymake-warnline ((((class color)) (:underline "blue")))))
 
-;; (custom-set-variables
-;;      '(help-at-pt-timer-delay 0.9)
-;;      '(help-at-pt-display-when-idle '(flymake-overlay)))
-
-(require 'flymake-cursor)
 ;;; end of my emacs configuration

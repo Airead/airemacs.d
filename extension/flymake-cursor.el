@@ -90,6 +90,8 @@ message to display, so there is one ;)"
    (if (and flyc--e-at-point editing-p)
        (progn
 ;;         (message "%s" (flyc/maybe-fixup-message flyc--e-at-point))
+         (forward-char 1)
+         (backward-char 1)
          (popup-tip (flyc/maybe-fixup-message flyc--e-at-point))
          (setq flyc--e-display-timer nil)))))
 
@@ -139,7 +141,7 @@ second, does the flymake error message (if any) get displayed.
     (if error-at-point
         (setq flyc--e-at-point error-at-point
               flyc--e-display-timer
-              (run-at-time "0.9 sec" nil 'flyc/show-stored-error-now))
+              (run-at-time "0.1 sec" nil 'flyc/show-stored-error-now))
       (setq flyc--e-at-point nil
             flyc--e-display-timer nil))))
 
