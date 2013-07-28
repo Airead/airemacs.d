@@ -42,7 +42,7 @@ Convert relative(MUST) path to absolute path."
     (dolist (l custom-lib-path)
       (add-to-list 'absolute-lib-path (expand-file-name l cur-dir)))
     absolute-lib-path))
-  
+
 ;;; set my own load-path
 (setq load-path (clear-site-lisp-path load-path))
 (setq custom-lib-path '(
@@ -69,7 +69,7 @@ Convert relative(MUST) path to absolute path."
 (setq load-path (append
                  (get-custom-load-path custom-lib-path) nil
                  load-path nil))
-  
+
 ;;; Text mode and Auto Fill mode
 ;; The next two lines put Emacs into Text mode are for writers who
 ;; want to start writing prose rather than code.
@@ -180,8 +180,8 @@ Convert relative(MUST) path to absolute path."
 
 (add-hook 'c-mode-hook
           (lambda ()
-                (setq indent-tabs-mode t)
-                (c-set-style "linux-tabs-only")))
+            (setq indent-tabs-mode t)
+            (c-set-style "linux-tabs-only")))
 
 ;; (defun linux-c-mode ()
 ;;   "C mode with adjusted defaults for use with the Linux kernel."
@@ -221,12 +221,12 @@ Convert relative(MUST) path to absolute path."
       '((sequence "TODO(t!)" "NEXT(n)" "WAITTING(w)" "SOMEDAY(s)" "|" "DONE(d@/!)" "ABORT(a@/!)")
         ))
 (setq org-tag-alist '(("OFFICE" . ?o)
-                     ("HOME" . ?h)
-                     ("AVOCATION" . ?a)
-                     ("WAIT" . ?w)
-                     ("IMPORTANT" . ?i)
-                     ("URGENT" . ?u)
-                     ("LIVING" . ?l)))
+                      ("HOME" . ?h)
+                      ("AVOCATION" . ?a)
+                      ("WAIT" . ?w)
+                      ("IMPORTANT" . ?i)
+                      ("URGENT" . ?u)
+                      ("LIVING" . ?l)))
 (setq org-refile-targets '(("task.org" :maxlevel . 1)
                            ("finished.org" :maxlevel . 1)))
 (setq org-directory "~/Dropbox/GTD/") 
@@ -245,7 +245,7 @@ Convert relative(MUST) path to absolute path."
         ("p" "Project" entry (file "project.org") 
          "* %? %^g\n %i\n")
         ("b" "overwork" plain (file+headline "~/work/addban.org" "2013-05")
-        "   %<<%Y-%m-%d %a %H:%M>> %?")))
+         "   %<<%Y-%m-%d %a %H:%M>> %?")))
 (setq org-default-notes-file (concat org-directory "/inbox.org"))
 ;; set agenda files
 (setq org-agenda-files (list "~/Dropbox/GTD/task.org"
@@ -358,7 +358,7 @@ Convert relative(MUST) path to absolute path."
 
 ;;; gdb bindkey
 (add-hook 'gdb-mode-hook '(lambda ()
-	        (define-key c-mode-base-map [(f5)] 'gud-go)
+                            (define-key c-mode-base-map [(f5)] 'gud-go)
                             (define-key c-mode-base-map [(f7)] 'gud-step)
                             (define-key c-mode-base-map [(f5)] 'gud-go)
                             (define-key c-mode-base-map [(f8)] 'gud-next)))
@@ -436,9 +436,9 @@ Convert relative(MUST) path to absolute path."
 (require 'erc-join)
 (erc-autojoin-mode 1)
 (setq erc-autojoin-channels-alist
-          '(
-            ("freenode.net" "#ubuntu-cn" "##0x71" "#openbrd")
-            ))
+      '(
+        ("freenode.net" "#ubuntu-cn" "##0x71" "#openbrd")
+        ))
 
 
 ;;; ein (emacs ipython notebook)
@@ -453,5 +453,56 @@ Convert relative(MUST) path to absolute path."
       (cons '("/rfc[0-9]+\\.txt\\(\\.gz\\)?\\'" . rfcview-mode)
             auto-mode-alist))
 (autoload 'rfcview-mode "rfcview" nil t)
+
+;;; outline minor mode key binding
+(require 'outline)
+(add-hook 'python-mode-hook '(lambda ()
+                               (outline-minor-mode 1)))
+(set-display-table-slot
+ standard-display-table
+ 'selective-display
+ (let ((face-offset (* (face-id 'shadow) (lsh 1 22))))
+   (vconcat (mapcar (lambda (c) (+ face-offset c)) " [...] "))))
+
+(define-key python-mode-map (kbd "M-p") (lambda () (interactive)
+                                          (outline-backward-same-level 1)
+                                          (back-to-indentation)))
+(define-key python-mode-map (kbd "M-n") (lambda () (interactive)
+                                          (outline-forward-same-level 1)
+                                          (back-to-indentation)))
+(define-key python-mode-map (kbd "C-M-u") (lambda () (interactive)
+                                            (outline-up-heading 1)
+                                            (back-to-indentation)))
+(define-key python-mode-map (kbd "C-M-p") (lambda () (interactive)
+                                            (outline-previous-visible-heading 1)
+                                            (back-to-indentation)))
+(define-key python-mode-map (kbd "C-M-n") (lambda () (interactive)
+                                            (outline-next-visible-heading 1)
+                                            (back-to-indentation)))
+(define-key python-mode-map (kbd "M-<up>") 'outline-move-subtree-up)
+(define-key python-mode-map (kbd "M-<down>") 'outline-move-subtree-down)
+
+; Outline-minor-mode key map
+(define-prefix-command 'cm-map nil "Outline-")
+; HIDE
+(define-key cm-map "q" 'hide-sublevels)    ; Hide everything but the top-level headings
+(define-key cm-map "t" 'hide-body)         ; Hide everything but headings (all body lines)
+(define-key cm-map "o" 'hide-other)        ; Hide other branches
+(define-key cm-map "c" 'hide-entry)        ; Hide this entry's body
+(define-key cm-map "l" 'hide-leaves)       ; Hide body lines in this entry and sub-entries
+(define-key cm-map "d" 'hide-subtree)      ; Hide everything in this entry and sub-entries
+; SHOW
+(define-key cm-map "a" 'show-all)          ; Show (expand) everything
+(define-key cm-map "e" 'show-entry)        ; Show this heading's body
+(define-key cm-map "i" 'show-children)     ; Show this heading's immediate child sub-headings
+(define-key cm-map "k" 'show-branches)     ; Show all sub-headings under this heading
+(define-key cm-map "s" 'show-subtree)      ; Show (expand) everything in this heading & below
+; MOVE
+(define-key cm-map "u" 'outline-up-heading)                ; Up
+(define-key cm-map "n" 'outline-next-visible-heading)      ; Next
+(define-key cm-map "p" 'outline-previous-visible-heading)  ; Previous
+(define-key cm-map "f" 'outline-forward-same-level)        ; Forward - same level
+(define-key cm-map "b" 'outline-backward-same-level)       ; Backward - same level
+(global-set-key "\M-o" cm-map)
 
 ;;; end of my emacs configuration
