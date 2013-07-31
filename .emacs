@@ -59,7 +59,7 @@ Convert relative(MUST) path to absolute path."
                         "./lib/w3m"
                         "./lib/color-theme"
                         "./lib/color-theme/emacs-color-theme-solarized"
-                        "../emacs-jedi"
+                        "./lib/emacs-jedi"
                         "./lib/cedet-1.1/common"
                         "./lib/ecb-2.40"
                         "./lib/ess-12.09-2/lisp"
@@ -101,6 +101,10 @@ Convert relative(MUST) path to absolute path."
 ;;; Set font
 (add-to-list 'default-frame-alist '(font . "monaco"))
 
+;;; open recent files
+(recentf-mode 1)
+(global-set-key "\C-xrf" 'recentf-open-files)
+
 ;;; icices
 (load-library "icicles")
 (icy-mode 1)
@@ -138,19 +142,19 @@ Convert relative(MUST) path to absolute path."
 
 
 ;; ;;; pymacs
-;; (require 'pymacs)
-;; (autoload 'pymacs-apply "pymacs")
-;; (autoload 'pymacs-call "pymacs")
-;; (autoload 'pymacs-eval "pymacs" nil t)
-;; (autoload 'pymacs-exec "pymacs" nil t)
-;; (autoload 'pymacs-load "pymacs" nil t)
-;; (autoload 'pymacs-autoload "pymacs")
+(require 'pymacs)
+(autoload 'pymacs-apply "pymacs")
+(autoload 'pymacs-call "pymacs")
+(autoload 'pymacs-eval "pymacs" nil t)
+(autoload 'pymacs-exec "pymacs" nil t)
+(autoload 'pymacs-load "pymacs" nil t)
+(autoload 'pymacs-autoload "pymacs")
 ;; ;;(eval-after-load "pymacs"
 ;; ;;  '(add-to-list 'pymacs-load-path YOUR-PYMACS-DIRECTORY"))
 
 ;; ;;; ropemacs
-;; (setq pymacs-load-path '("./lib/pymacs"))
-;; (pymacs-load "ropemacs" "rope-")
+(setq pymacs-load-path '("./lib/pymacs"))
+(pymacs-load "ropemacs" "rope-")
 
 ;;; auto complete
 (require 'auto-complete-config)
@@ -344,10 +348,6 @@ Convert relative(MUST) path to absolute path."
 
 (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
 
-;;; open recent files
-(recentf-mode 1)
-(global-set-key "\C-xrf" 'recentf-open-files)
-
 ;;; define key for view-mode
 (require 'view)
 (global-set-key "\C-cv" 'view-mode)
@@ -429,10 +429,37 @@ Convert relative(MUST) path to absolute path."
 (global-set-key "\C-ci" 'magit-status)
 
 ;;; jedi
-(add-hook 'python-mode-hook 'jedi:setup)
 (setq jedi:setup-keys t)
-(autoload 'jedi:setup "jedi" nil t)
-(add-hook 'python-mode-hook 'jedi:ac-setup)
+(require 'jedi)
+(add-hook 'python-mode-hook 'jedi:setup)
+
+;; (setq jedi:server-args
+;;       '("--sys-path" "./lib/emacs-jedi"))
+
+;; for buildout
+(defun find-parent-with-file (path filename)
+  "Traverse PATH upwards until we find FILENAME in the dir.
+If we find it return the path of that dir, othwise nil is
+returned."
+  (if (file-exists-p (concat (expand-file-name path) "/" filename))
+      path
+    (let ((parent-dir (file-name-directory (directory-file-name path))))
+      ;; Make sure we do not go into infinite recursion
+      (if (string-equal path parent-dir)
+          nil
+        (find-parent-with-file parent-dir filename)))))
+
+(defun buildout-find-bin (exec)
+      "Find a buildout-relative binary script and return absolute path or `exc`"
+      (let* ((buildout-directory (find-parent-with-file default-directory "buildout.cfg"))
+            (bin-path (concat buildout-directory "bin/" exec)))
+        (if (file-exists-p bin-path) bin-path exec)))
+
+(defun check-jedi-python ()
+  "Update the path to python for jedi-mode if we switch to a Buildout project."
+  (let ((bin (buildout-find-bin "python")))
+    (set (make-local-variable 'jedi:server-command) (list bin jedi:server-script))))
+(add-hook 'python-mode-hook 'check-jedi-python)
 
 ;;; ERC
 (require 'erc-join)
