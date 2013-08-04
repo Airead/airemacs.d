@@ -227,7 +227,7 @@ Convert relative(MUST) path to absolute path."
       '(("n" "New" entry (file+headline "inbox.org" "Inbox")
          "* %? %<<%Y-%m-%d %H:%M>> \n %i\n")
         ("t" "Task" entry (file+headline "task.org" "Task")
-         "** TODO %?\n %i\n")
+         "** TODO %? %<<%Y-%m-%d %H:%M>> \n %i\n")
         ("c" "Calendar" entry (file+headline "task.org" "Calendar") 
          "** TODO %?\n %i\n")
         ("i" "Idea" entry (file+headline "task.org" "Ideas")
