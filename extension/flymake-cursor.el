@@ -89,7 +89,7 @@ message to display, so there is one ;)"
   (let ((editing-p (= (minibuffer-depth) 0)))
    (if (and flyc--e-at-point editing-p)
        (progn
-;;         (message "%s" (flyc/maybe-fixup-message flyc--e-at-point))
+         (message "%s" (flyc/maybe-fixup-message flyc--e-at-point))
          (forward-char 1)
          (backward-char 1)
          (popup-tip (flyc/maybe-fixup-message flyc--e-at-point))
