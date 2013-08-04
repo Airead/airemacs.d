@@ -65,6 +65,7 @@ Convert relative(MUST) path to absolute path."
                         "./lib/ess-12.09-2/lisp"
                         "./lib/magit"
                         "./lib/ein"
+                        "./lib/bookmark+"
                         ))
 (setq load-path (append
                  (get-custom-load-path custom-lib-path) nil
@@ -139,22 +140,6 @@ Convert relative(MUST) path to absolute path."
  "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")
 
 (define-key python-mode-map (kbd "C-c n") 'ein:connect-to-notebook-buffer)
-
-
-;; ;;; pymacs
-(require 'pymacs)
-(autoload 'pymacs-apply "pymacs")
-(autoload 'pymacs-call "pymacs")
-(autoload 'pymacs-eval "pymacs" nil t)
-(autoload 'pymacs-exec "pymacs" nil t)
-(autoload 'pymacs-load "pymacs" nil t)
-(autoload 'pymacs-autoload "pymacs")
-;; ;;(eval-after-load "pymacs"
-;; ;;  '(add-to-list 'pymacs-load-path YOUR-PYMACS-DIRECTORY"))
-
-;; ;;; ropemacs
-(setq pymacs-load-path '("./lib/pymacs"))
-(pymacs-load "ropemacs" "rope-")
 
 ;;; auto complete
 (require 'auto-complete-config)
@@ -557,6 +542,26 @@ returned."
  '(flymake-errline ((((class color)) (:underline "red"))))
  '(flymake-warnline ((((class color)) (:underline "blue")))))
 
+;;; bookmark+
+;(require 'bookmark+)
+
+;; ;;; pymacs
+(require 'pymacs)
+(autoload 'pymacs-apply "pymacs")
+(autoload 'pymacs-call "pymacs")
+(autoload 'pymacs-eval "pymacs" nil t)
+(autoload 'pymacs-exec "pymacs" nil t)
+(autoload 'pymacs-load "pymacs" nil t)
+(autoload 'pymacs-autoload "pymacs")
+;; ;;(eval-after-load "pymacs"
+;; ;;  '(add-to-list 'pymacs-load-path YOUR-PYMACS-DIRECTORY"))
+
+;; ;;; ropemacs
+(setq pymacs-load-path '("./lib/pymacs"))
+(pymacs-load "ropemacs" "rope-")
+(rope-init)
+(defun rope-before-save-actions() ())
+(defun rope-after-save-actions() ())
 
 ;;; M-r instead C-x r
 (setq new-M-r (lookup-key global-map (kbd "C-x r")))
