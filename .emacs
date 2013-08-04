@@ -420,6 +420,9 @@ Convert relative(MUST) path to absolute path."
 (setq jedi:setup-keys t)
 (require 'jedi)
 (add-hook 'python-mode-hook 'jedi:setup)
+(define-key python-mode-map (kbd "C-M-.") 'jedi:goto-definition)
+(define-key python-mode-map (kbd "C-M-,") 'jedi:goto-definition-pop-marker)
+
 
 ;; (setq jedi:server-args
 ;;       '("--sys-path" "./lib/emacs-jedi"))
