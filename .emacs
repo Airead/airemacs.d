@@ -563,7 +563,7 @@ returned."
 ;; ;;  '(add-to-list 'pymacs-load-path YOUR-PYMACS-DIRECTORY"))
 
 ;; ;;; ropemacs
-(setq pymacs-load-path '("./lib/pymacs"))
+(setq pymacs-load-path (list (get-path "./lib/pymacs")))
 (pymacs-load "ropemacs" "rope-")
 ; (defun rope-before-save-actions() ())
 ; (defun rope-after-save-actions() ())
@@ -574,6 +574,10 @@ returned."
        (file-exists-p buffer-file-name)
        (file-cache-add-file buffer-file-name)))
 (add-hook 'kill-buffer-hook 'file-cache-add-this-file)
+
+;;; py autopep8
+(require 'py-autopep8)
+(define-key python-mode-map (kbd "C-c f") 'python-my-fmt)
 
 ;;; M-r instead C-x r
 (setq new-M-r (lookup-key global-map (kbd "C-x r")))
