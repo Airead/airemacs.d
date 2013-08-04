@@ -557,4 +557,10 @@ returned."
  '(flymake-errline ((((class color)) (:underline "red"))))
  '(flymake-warnline ((((class color)) (:underline "blue")))))
 
+
+;;; M-r instead C-x r
+(setq new-M-r (lookup-key global-map (kbd "C-x r")))
+(global-set-key (kbd "M-r") new-M-r)
+
+
 ;;; end of my emacs configuration
