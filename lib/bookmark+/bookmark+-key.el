@@ -175,7 +175,7 @@
 ;;
 (when (> emacs-major-version 21)
   (define-key bookmark-map [down]       'bmkp-next-bookmark-this-file/buffer-repeat) ; `C-x p down'
-  (define-key bookmark-map "n"          'bmkp-next-bookmark-this-file/buffer-repeat) ; `C-x p n'
+  ;; (define-key bookmark-map "n"          'bmkp-next-bookmark-this-file/buffer-repeat) ; `C-x p n'
   (define-key bookmark-map "\C-n"       'bmkp-next-bookmark-this-file/buffer-repeat) ; `C-x p C-n'
 
   ;; This requires the fix for Emacs bug #6256, which is in Emacs 23.3 (presumably).

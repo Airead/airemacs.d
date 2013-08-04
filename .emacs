@@ -559,9 +559,8 @@ returned."
 ;; ;;; ropemacs
 (setq pymacs-load-path '("./lib/pymacs"))
 (pymacs-load "ropemacs" "rope-")
-(rope-init)
-(defun rope-before-save-actions() ())
-(defun rope-after-save-actions() ())
+; (defun rope-before-save-actions() ())
+; (defun rope-after-save-actions() ())
 
 ;;; M-r instead C-x r
 (setq new-M-r (lookup-key global-map (kbd "C-x r")))
