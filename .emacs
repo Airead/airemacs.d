@@ -96,6 +96,9 @@ Convert relative(MUST) path to absolute path."
 ;;; use ibuffer
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
+;;; dired+
+(require 'dired+)
+
 ;;; Continue to display the matching parentheses
 (show-paren-mode t)
 
