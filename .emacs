@@ -87,6 +87,14 @@ Convert relative(MUST) path to absolute path."
 (global-linum-mode t)
 (menu-bar-mode 0)
 
+;;; easy keys to split window. Key based on ErgoEmacs keybinding
+(global-set-key (kbd "M-3") 'delete-other-windows) ; expand current pane
+(global-set-key (kbd "M-4") 'split-window-vertically) ; split pane top/bottom
+(global-set-key (kbd "M-1") 'split-window-horizontally) ; split pane left/right
+(global-set-key (kbd "M-2") 'delete-window) ; close current pane
+(global-set-key (kbd "M-8") 'other-window) ; cursor to other pane
+
+
 ;;; set time locale
 (setq system-time-locale "C")
 
@@ -511,6 +519,10 @@ returned."
 (define-key cm-map "c" 'hide-entry)        ; Hide this entry's body
 (define-key cm-map "l" 'hide-leaves)       ; Hide body lines in this entry and sub-entries
 (define-key cm-map "d" 'hide-subtree)      ; Hide everything in this entry and sub-entries
+
+(define-key outline-minor-mode-map (kbd "M-o 1") (lambda () (interactive) (hide-sublevels 1)))
+(define-key outline-minor-mode-map (kbd "M-o 2") (lambda () (interactive) (hide-sublevels 2)))
+(define-key outline-minor-mode-map (kbd "M-o 3") (lambda () (interactive) (hide-sublevels 3)))
 ; SHOW
 (define-key cm-map "a" 'show-all)          ; Show (expand) everything
 (define-key cm-map "e" 'show-entry)        ; Show this heading's body
