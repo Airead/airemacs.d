@@ -561,6 +561,7 @@ returned."
 (autoload 'pymacs-autoload "pymacs")
 ;; ;;(eval-after-load "pymacs"
 ;; ;;  '(add-to-list 'pymacs-load-path YOUR-PYMACS-DIRECTORY"))
+(setenv "PYMACS_PYTHON" "/usr/bin/python")
 
 ;; ;;; ropemacs
 (setq pymacs-load-path (list (get-path "./lib/pymacs")))

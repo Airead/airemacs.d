@@ -285,7 +285,7 @@ avoid collision by something like this::
   "Keybind for command `jedi:complete'."
   :group 'jedi)
 
-(defcustom jedi:key-goto-definition (kbd "C-.")
+(defcustom jedi:key-goto-definition (kbd "C-M-.")
   "Keybind for command `jedi:goto-definition'."
   :group 'jedi)
 
@@ -298,7 +298,7 @@ avoid collision by something like this::
 `anything-jedi-related-names'."
   :group 'jedi)
 
-(defcustom jedi:key-goto-definition-pop-marker (kbd "C-,")
+(defcustom jedi:key-goto-definition-pop-marker (kbd "C-M-,")
   "Keybind for command `jedi:goto-definition-pop-marker'."
   :group 'jedi)
 
@@ -368,9 +368,9 @@ toolitp when inside of function call.
 (let ((map jedi-mode-map))
   (define-key map (kbd "<C-tab>") 'jedi:complete)
   (define-key map (kbd "C-c ?") 'jedi:show-doc)
-  (define-key map (kbd "C-c .") 'jedi:goto-definition)
-  (define-key map (kbd "C-c ,") 'jedi:goto-definition-pop-marker)
-  (let ((command (cond
+  ;; (define-key map (kbd "C-c .") 'jedi:goto-definition)
+  ;; (define-key map (kbd "C-c ,") 'jedi:goto-definition-pop-marker)
+   (let ((command (cond
                   ((featurep 'helm) 'helm-jedi-related-names)
                   ((featurep 'anything) 'anything-jedi-related-names)
                   ((locate-library "helm") 'helm-jedi-related-names)
