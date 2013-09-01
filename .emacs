@@ -87,6 +87,11 @@ Convert relative(MUST) path to absolute path."
 (global-linum-mode t)
 (menu-bar-mode 0)
 
+(require 'highlight-parentheses)
+(add-hook 'python-mode-hook (lambda ()
+                              (setq require-final-newline t)
+                              (highlight-parentheses-mode 1)))
+
 ;;; easy keys to split window. Key based on ErgoEmacs keybinding
 (global-set-key (kbd "M-3") 'delete-other-windows) ; expand current pane
 (global-set-key (kbd "M-4") 'split-window-vertically) ; split pane top/bottom
