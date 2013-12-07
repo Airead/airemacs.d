@@ -1,0 +1,10 @@
+# name: python file copyright
+# key: pcopy
+# --
+# -*- coding: utf-8 -*-
+#
+# created: `(current-time-string)`
+#
+
+__author__ = 'Airead Fan <fgh1987168@gmail.com>'
+__version__ = '0.0.1'

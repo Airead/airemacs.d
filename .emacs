@@ -36,6 +36,7 @@ that all runngin scripts in my emacs are controllable"
 
 (defun get-custom-load-path (paths)
   "get custiom load path.
+
 Convert relative(MUST) path to absolute path."
   (let ((cur-dir (file-name-directory load-file-name))
         absolute-lib-path)
@@ -116,7 +117,7 @@ Convert relative(MUST) path to absolute path."
 (show-paren-mode t)
 
 ;;; Set font
-(add-to-list 'default-frame-alist '(font . "monaco"))
+(add-to-list 'default-frame-alist '(font . "monaco-16"))
 
 ;;; open recent files
 (recentf-mode 1)
@@ -435,6 +436,7 @@ Convert relative(MUST) path to absolute path."
 (add-hook 'python-mode-hook 'jedi:setup)
 (define-key python-mode-map (kbd "C-M-.") 'jedi:goto-definition)
 (define-key python-mode-map (kbd "C-M-,") 'jedi:goto-definition-pop-marker)
+(define-key python-mode-map (kbd "C-c d") 'jedi:show-doc)
 
 
 ;; (setq jedi:server-args
@@ -464,6 +466,8 @@ returned."
   (let ((bin (buildout-find-bin "python")))
     (set (make-local-variable 'jedi:server-command) (list bin jedi:server-script))))
 (add-hook 'python-mode-hook 'check-jedi-python)
+
+
 
 ;;; ERC
 (require 'erc-join)
@@ -550,7 +554,7 @@ returned."
            (local-file (file-relative-name
                         temp-file
                         (file-name-directory buffer-file-name))))
-          (list "flake8" (list local-file))))
+          (list (get-path "extension/pyflake8.py") (list local-file))))
       (add-to-list 'flymake-allowed-file-name-masks
                '("\\.py\\'" flymake-pylint-init)))
 (add-hook 'python-mode-hook (lambda ()

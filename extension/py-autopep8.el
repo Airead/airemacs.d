@@ -61,7 +61,7 @@
     (with-current-buffer patchbuf
       (erase-buffer))
     (write-region nil nil tmpfile)
-    (if (zerop (call-process "autopep8" nil errbuf nil "--in-place" tmpfile))
+    (if (zerop (call-process "autopep8" nil errbuf nil "--in-place" "--max-line-length=120" tmpfile))
         (if (zerop (call-process-region (point-min) (point-max) "diff" nil patchbuf nil "-n" "-" tmpfile))
             (progn
               (kill-buffer errbuf)
