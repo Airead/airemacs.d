@@ -601,6 +601,9 @@ returned."
 (require 'py-autopep8)
 (define-key python-mode-map (kbd "C-c f") 'python-fmt)
 
+;;; nodejs-mode
+(require 'nodejs-repl)
+
 ;;; M-r instead C-x r
 (setq new-M-r (lookup-key global-map (kbd "C-x r")))
 (global-set-key (kbd "M-r") new-M-r)
