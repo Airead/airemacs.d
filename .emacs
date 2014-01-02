@@ -370,7 +370,7 @@ Convert relative(MUST) path to absolute path."
 (require 'color-theme-solarized)
 (setq solarized-termcolors 256)
 (setq solarized-contrast 'normal)
-(color-theme-solarized-light)
+(color-theme-solarized-dark)
 
 ;;; Load CEDET.
 ;; See cedet/common/cedet.info for configuration details.
@@ -603,6 +603,18 @@ returned."
 
 ;;; nodejs-mode
 (require 'nodejs-repl)
+
+;;; nosetests for python
+(require 'nose)
+(add-hook 'python-mode-hook
+          (lambda ()
+            ;; (local-set-key "\C-ca" 'nosetests-all)
+            (local-set-key "\C-cm" 'nosetests-module)
+            (local-set-key "\C-c." 'nosetests-one)
+            (local-set-key "\C-cpa" 'nosetests-pdb-all)
+            (local-set-key "\C-cpm" 'nosetests-pdb-module)
+            (local-set-key "\C-cp." 'nosetests-pdb-one)))
+
 
 ;;; M-r instead C-x r
 (setq new-M-r (lookup-key global-map (kbd "C-x r")))

@@ -15,6 +15,15 @@ pyflakes_warning = make_re(
     'redefinition of unused',
     'too many blank lines',
     'blank line contains whitespace',
+    'blank line at end of file',
+    'missing whitespace around operator',
+    'missing whitespace after',
+    'multiple imports on one line',
+    'expected 2 blank lines',
+    'at least two spaces before inline comment',
+    'inline comment should start with',
+    ' is deprecated, use ',
+    'continuation line over-indented for visual indent',
 )
 pep8_ignore = ['E501']
 pep8_warning = make_re('.')

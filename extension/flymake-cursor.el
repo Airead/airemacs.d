@@ -92,7 +92,6 @@ message to display, so there is one ;)"
          (message "%s" (flyc/maybe-fixup-message flyc--e-at-point))
          (forward-char 1)
          (backward-char 1)
-         (popup-tip (flyc/maybe-fixup-message flyc--e-at-point))
          (setq flyc--e-display-timer nil)))))
 
 
