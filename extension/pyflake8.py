@@ -24,6 +24,8 @@ pyflakes_warning = make_re(
     'inline comment should start with',
     ' is deprecated, use ',
     'continuation line over-indented for visual indent',
+    'line too long',
+    'trailing whitespace',
 )
 pep8_ignore = ['E501']
 pep8_warning = make_re('.')
