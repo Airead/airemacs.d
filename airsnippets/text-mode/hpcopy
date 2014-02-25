@@ -6,5 +6,11 @@
 # created: `(current-time-string)`
 #
 
+import sys
+
+reload(sys)
+sys.setdefaultencoding('UTF-8')
+
+
 __author__ = 'Airead Fan <fanrenhao@crazyhorents.com>'
 __version__ = '0.0.1'
